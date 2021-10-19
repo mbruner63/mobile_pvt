@@ -22,12 +22,21 @@ class _SessionPageState extends State<SessionPage> {
   bool showTime = false;
   late int _delay = 0;
   int startMilliseconds = 0;
+  List<int> reactionTimes = [];
+  int reactionTime = 0;
+  int session_start_milliseconds = 0;
+  int running_milliseconds = 0;
+  List<int> stimulationTimes = [];
+  late Random rnd;
+  bool enabled = false;
+  late int _secondsRemaining;
   @override
   void initState() {
     super.initState();
     rnd = Random();
     _delay = 1 + rnd.nextInt(9);
     _secondsRemaining = sessionTime;
+    session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
     _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
   }
 
@@ -42,12 +51,14 @@ class _SessionPageState extends State<SessionPage> {
           setState(() {
             showTarget = true;
             startMilliseconds = DateTime.now().millisecondsSinceEpoch;
+            stimulationTimes.add(DateTime.now().millisecondsSinceEpoch -
+                session_start_milliseconds);
           });
         }
       }
     } else {
       t.cancel();
-      startTime = DateTime.now();
+
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -55,13 +66,6 @@ class _SessionPageState extends State<SessionPage> {
           (Route<dynamic> route) => false);
     }
   }
-
-  List<int> reactionTimes = [];
-  int reactionTime = 0;
-  List<int> stimulationTimes = [];
-  late Random rnd;
-  bool enabled = false;
-  late int _secondsRemaining;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +108,7 @@ class _SessionPageState extends State<SessionPage> {
                                           reactionTime = DateTime.now()
                                                   .millisecondsSinceEpoch -
                                               startMilliseconds;
+                                          reactionTimes.add(reactionTime);
                                           _delay = 1 + rnd.nextInt(9);
                                         });
                                       },
