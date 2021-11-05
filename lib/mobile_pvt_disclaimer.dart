@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/main.dart';
 
 import 'main_menu.dart';
 
@@ -13,6 +14,7 @@ class DisclaimerPage extends StatelessWidget {
         title: const Text('Mobile PVT - DISCLAIMER'),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
+      //scaffoldBackgroundColor: Theme.of(context).backgroundColor,
       body: Center(
         child: ListView(
           //mainAxisAlignment: MainAxisAlignment.start,
@@ -25,8 +27,8 @@ class DisclaimerPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Text(
-                'This is a proof-of-concept app The psychomotor vigilance task (PVT) .\n\n'
-                'The psychomotor vigilance task (PVT) is a sustained-attention, reaction-timed task that measures the speed with which subjects respond to a visual stimulus.'
+                'This is a proof-of-concept app for the Psychomotor Vigilance Task (PVT) .\n\n'
+                'The Psychomotor Vigilance Task (PVT) is a sustained-attention, reaction-timed task that measures the speed with which subjects respond to a visual stimulus.'
                 'This app is intended for investigational data collection purposes ONLY.',
                 style: Theme.of(context).textTheme.headline5,
               ),
@@ -35,8 +37,12 @@ class DisclaimerPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue.shade900),
+                  //backgroundColor: MaterialStateProperty.all<Color>(
+                  //Theme.of(context).primaryColor)
+                ),
+                //Theme.of(context).primaryColor)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text('I AGREE',

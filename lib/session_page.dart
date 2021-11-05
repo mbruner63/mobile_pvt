@@ -71,7 +71,8 @@ class _SessionPageState extends State<SessionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PVT - Session Running'),
+        title: const Text('PVT Session in Progress'),
+        //backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
@@ -93,13 +94,14 @@ class _SessionPageState extends State<SessionPage> {
                   padding: const EdgeInsets.all(4),
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Center(child: Text('Time: $reactionTime')),
-                        Center(
-                          child: SizedBox(
-                              width: 250,
-                              height: 250,
+                        Expanded(
+                          child: FittedBox(
+                              //width: 250,
+                              //height: 250,
                               child: showTarget
                                   ? GestureDetector(
                                       onTap: () {
@@ -135,7 +137,7 @@ class _SessionPageState extends State<SessionPage> {
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.redAccent)),
+                        MaterialStateProperty.all<Color>(Colors.red.shade800)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text('ABORT SESSION',
