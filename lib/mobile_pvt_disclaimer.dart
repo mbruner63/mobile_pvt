@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/main.dart';
+//import 'package:flutter_launcher_icons/main.dart';
 
 import 'main_menu.dart';
 
@@ -34,23 +34,31 @@ class DisclaimerPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue.shade900),
-                  //backgroundColor: MaterialStateProperty.all<Color>(
-                  //Theme.of(context).primaryColor)
-                ),
-                //Theme.of(context).primaryColor)),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text('I AGREE',
-                      style: Theme.of(context).textTheme.headline5),
-                ),
-                onPressed: () {
-                  onIAgreePressed(context);
-                },
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Container(
+                    constraints: BoxConstraints(
+                        minWidth: (MediaQuery.of(context).size.width - 10) / 4),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.blue.shade900),
+                        //backgroundColor: MaterialStateProperty.all<Color>(
+                        //Theme.of(context).primaryColor)
+                      ),
+                      //Theme.of(context).primaryColor)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text('I AGREE',
+                            style: Theme.of(context).textTheme.headline5),
+                      ),
+                      onPressed: () {
+                        onIAgreePressed(context);
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

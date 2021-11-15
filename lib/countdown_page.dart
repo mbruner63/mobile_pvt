@@ -66,12 +66,12 @@ class _CountdownPageState extends State<CountdownPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Text('Session Countdown',
                 style: Theme.of(context).textTheme.headline6),
           ),
           Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
               child: Text(
                   'Hold smartphone device throughout the entire session.\n\n'
                   'Session will automatically begin in:',

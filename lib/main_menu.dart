@@ -12,19 +12,11 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: 'Tremor Measurement POC App',
+      //title: 'Tremor Measurement POC App',
       theme: ThemeData(
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: Colors.grey[850],
-        //primaryColor: Colors.grey.shade900,
-        //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        //primaryColor: Colors.deepPurple.shade900,
-        //accentColor: Colors.deepPurple.shade300,
-        // backgroundColor: Colors.grey.shade900,
-        //scaffoldBackgroundColor: Colors.grey.shade900,
-        //  textTheme: const TextTheme(
-        //     headline4: TextStyle(fontSize: 36, fontWeight: FontWeight.bold))
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -37,20 +29,13 @@ class MainMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                // width: double.maxFinite,
                 height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  //child: ElevatedButton(
-                  // style: ButtonStyle(
-                  //   backgroundColor: MaterialStateProperty.all<Color>(
-                  //        Colors.blue.shade500),
-                  //backgroundColor: MaterialStateProperty.all<Color>(
-                  //    Theme.of(context).primaryColor),
-                  //   ),
-                  //child: Padding(
-                  //  padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -59,7 +44,6 @@ class MainMenu extends StatelessWidget {
                     icon: Icon(Icons.settings, size: 50),
                     label: Text('Settings',
                         style: Theme.of(context).textTheme.headline5),
-
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -67,21 +51,13 @@ class MainMenu extends StatelessWidget {
                               builder: (context) =>
                                   ConfigPage(title: 'PVT - Settings')));
                     },
-                    // child: Text('Settings',
-                    //    style: Theme.of(context).textTheme.headline5),
                   ),
-                  //onPressed: () {
-                  //  Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //        builder: (context) =>
-                  //           ConfigPage(title: 'PVT - Settings')));
-                  //  },
-                  //  ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                //width: double.maxFinite,
                 height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -103,8 +79,10 @@ class MainMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                //width: double.infinity,
                 height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

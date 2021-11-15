@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'main_menu.dart';
+import 'AfterRating.dart';
 
 //DateTime.now()
 class SessionPage extends StatefulWidget {
@@ -62,7 +63,8 @@ class _SessionPageState extends State<SessionPage> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => const MainMenu(title: 'PVT - Main Menu')),
+              builder: (context) =>
+                  PostRatingPage(title: 'PVT - Post Session Rating')),
           (Route<dynamic> route) => false);
     }
   }
@@ -116,7 +118,7 @@ class _SessionPageState extends State<SessionPage> {
                                       },
                                       child: const Image(
                                           image: AssetImage(
-                                              'assets/images/pvt_target.png')),
+                                              'assets/images/pvt_target3.png')),
                                     )
                                   : null),
                         ),
