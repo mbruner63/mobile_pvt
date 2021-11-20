@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 //import 'package:flutter_launcher_icons/main.dart';
 import 'package:mobile_pvt/config_page.dart';
 import 'package:mobile_pvt/rating_page.dart';
+//import 'package:mobile_pvt/password_page.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key, required String title}) : super(key: key);
@@ -48,8 +49,9 @@ class MainMenu extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ConfigPage(title: 'PVT - Settings')));
+                              builder: (context) => ConfigPage(
+                                  title: 'PVT - Configure Session')));
+                      // ConfigPage(title: 'PVT - Settings')));
                     },
                   ),
                 ),
