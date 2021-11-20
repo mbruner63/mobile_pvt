@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+//import 'package:flutter_launcher_icons/main.dart';
 import 'package:mobile_pvt/config_page.dart';
 import 'package:mobile_pvt/rating_page.dart';
 
@@ -11,38 +12,38 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      title: 'Tremor Measurement POC App',
+      //title: 'Tremor Measurement POC App',
       theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.deepPurple.shade900,
-          accentColor: Colors.deepPurple.shade300,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          backgroundColor: Colors.grey.shade900,
-          textTheme: const TextTheme(
-              headline4: TextStyle(fontSize: 36, fontWeight: FontWeight.bold))),
+        brightness: Brightness.dark,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Colors.grey[850],
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Main Menu'),
-          backgroundColor: Colors.blueGrey[700],
+          title: const Text('PVT - Main Menu'),
+          //backgroundColor: Colors.grey.shade400,
         ),
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                // width: double.maxFinite,
+                height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+                  child: ElevatedButton.icon(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text('Settings',
-                          style: Theme.of(context).textTheme.headline5),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blue.shade900),
                     ),
+                    icon: Icon(Icons.settings, size: 50),
+                    label: Text('Settings',
+                        style: Theme.of(context).textTheme.headline5),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -53,19 +54,21 @@ class MainMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                //width: double.maxFinite,
+                height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+                  child: ElevatedButton.icon(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text('Begin Test',
-                          style: Theme.of(context).textTheme.headline5),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blue.shade900),
                     ),
+                    icon: Icon(Icons.timer, size: 50),
+                    label: Text('Begin Test',
+                        style: Theme.of(context).textTheme.headline5),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -76,19 +79,21 @@ class MainMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
+              Container(
+                constraints: BoxConstraints(
+                    minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+                //width: double.infinity,
+                height: 90,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
+                  child: ElevatedButton.icon(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text('Exit App',
-                          style: Theme.of(context).textTheme.headline5),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blue.shade900),
                     ),
+                    icon: Icon(Icons.door_back_door_outlined, size: 50),
+                    label: Text('Exit App',
+                        style: Theme.of(context).textTheme.headline5),
                     onPressed: () {
                       SystemChannels.platform
                           .invokeMethod('SystemNavigator.pop');
@@ -96,10 +101,29 @@ class MainMenu extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // width: double.infinity,
+              // child: Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: ElevatedButton(
+              //     style: ButtonStyle(
+              //       backgroundColor: MaterialStateProperty.all<Color>(
+              //           Colors.blue.shade900),
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(16.0),
+              //       child: Text('Exit App',
+              //           style: Theme.of(context).textTheme.headline5),
+              //     ),
+              //     onPressed: () {
+              //       SystemChannels.platform
+              //           .invokeMethod('SystemNavigator.pop');
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),
-        backgroundColor: Colors.black,
       ),
     );
   }

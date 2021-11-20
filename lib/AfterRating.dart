@@ -2,28 +2,28 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_pvt/countdown_page.dart';
+//import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
 
-class RatingPage extends StatefulWidget {
-  RatingPage({Key? key, required this.title}) : super(key: key) {}
+class PostRatingPage extends StatefulWidget {
+  PostRatingPage({Key? key, required this.title}) : super(key: key) {}
 
   final String title;
 
   @override
-  _RatingPageState createState() => _RatingPageState();
+  _PostRatingPageState createState() => _PostRatingPageState();
 }
 
-class _RatingPageState extends State<RatingPage> {
+class _PostRatingPageState extends State<PostRatingPage> {
   double _currentSliderValue = 5;
-  _RatingPageState() {}
+  _PostRatingPageState() {}
   int i = 5;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PVT - Configure Session'),
+        title: const Text('PVT - Post Session Rating'),
         //backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: Theme.of(context).backgroundColor,
@@ -49,10 +49,12 @@ class _RatingPageState extends State<RatingPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 8),
+                          vertical: 8, horizontal: 4),
                       child: Text(
-                        'How do you feel?      $_currentSliderValue',
+                        ' Post session, how do you feel? $_currentSliderValue',
+
                         style: Theme.of(context).textTheme.headline6,
+                        //.of(context).textTheme.headline6,
                         //textAlign: TextAlign.end,
                       ),
                     ),
@@ -90,18 +92,21 @@ class _RatingPageState extends State<RatingPage> {
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.blue.shade900),
                       ),
-                      icon: Icon(Icons.timer, size: 30),
+                      icon: Icon(Icons.check, size: 30),
                       label: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text('Begin Test',
+                        child: Text('Done',
                             style: Theme.of(context).textTheme.headline5),
                       ),
-                      onPressed: () async {
+                      // onPressed: () {
+                      //   Navigator.pop(context);
+                      // },
+                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CountdownPage(
-                                    title: 'PVT - Prepare to start')));
+                                builder: (context) =>
+                                    const MainMenu(title: 'PVT - Main Menu')));
                       },
                     ),
                   ),
