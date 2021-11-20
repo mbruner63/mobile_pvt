@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'main_menu.dart';
-import 'AfterRating.dart';
 
 //DateTime.now()
 class SessionPage extends StatefulWidget {
@@ -63,8 +62,7 @@ class _SessionPageState extends State<SessionPage> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  PostRatingPage(title: 'PVT - Post Session Rating')),
+              builder: (context) => const MainMenu(title: 'PVT - Main Menu')),
           (Route<dynamic> route) => false);
     }
   }
@@ -73,8 +71,7 @@ class _SessionPageState extends State<SessionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PVT Session in Progress'),
-        //backgroundColor: Colors.grey.shade800,
+        title: const Text('PVT - Session Running'),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
@@ -96,14 +93,13 @@ class _SessionPageState extends State<SessionPage> {
                   padding: const EdgeInsets.all(4),
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Center(child: Text('Time: $reactionTime')),
-                        Expanded(
-                          child: FittedBox(
-                              //width: 250,
-                              //height: 250,
+                        Center(
+                          child: SizedBox(
+                              width: 250,
+                              height: 250,
                               child: showTarget
                                   ? GestureDetector(
                                       onTap: () {
@@ -118,7 +114,7 @@ class _SessionPageState extends State<SessionPage> {
                                       },
                                       child: const Image(
                                           image: AssetImage(
-                                              'assets/images/pvt_target3.png')),
+                                              'assets/images/pvt_target.png')),
                                     )
                                   : null),
                         ),
@@ -139,7 +135,7 @@ class _SessionPageState extends State<SessionPage> {
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red.shade800)),
+                        MaterialStateProperty.all<Color>(Colors.redAccent)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text('ABORT SESSION',

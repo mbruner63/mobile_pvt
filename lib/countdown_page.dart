@@ -58,7 +58,6 @@ class _CountdownPageState extends State<CountdownPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PVT - Countdown'),
-        // backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Column(
@@ -66,12 +65,12 @@ class _CountdownPageState extends State<CountdownPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             child: Text('Session Countdown',
                 style: Theme.of(context).textTheme.headline6),
           ),
           Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
+              padding: const EdgeInsets.all(24),
               child: Text(
                   'Hold smartphone device throughout the entire session.\n\n'
                   'Session will automatically begin in:',
@@ -88,7 +87,7 @@ class _CountdownPageState extends State<CountdownPage> {
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red.shade800)),
+                        MaterialStateProperty.all<Color>(Colors.redAccent)),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
