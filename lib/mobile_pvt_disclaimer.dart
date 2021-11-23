@@ -1,14 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:mobile_pvt/SearchingForDevicesPage.dart';
 //import 'package:flutter_launcher_icons/main.dart';
 
 import 'main_menu.dart';
+
+FlutterBlue flutterBlue = FlutterBlue.instance;
 
 class DisclaimerPage extends StatelessWidget {
   const DisclaimerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    /*flutterBlue.startScan(timeout: Duration(seconds: 4));
+
+// Listen to scan results
+    var subscription = flutterBlue.scanResults.listen((results) {
+      // do something with scan results
+      for (ScanResult r in results) {
+        if (r.device.name.length > 1) {
+          if ((r.device.name[0] == 'A') && (r.device.name[1] == 'P')) {
+            print('${r.device.name} found! rssi: ${r.rssi}');
+          }
+        }
+      }
+    });
+
+// Stop scanning
+    flutterBlue.stopScan();*/
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mobile PVT - DISCLAIMER'),
@@ -71,7 +91,9 @@ class DisclaimerPage extends StatelessWidget {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => const MainMenu(title: 'Main Menu')));
+            //builder: (context) => const MainMenu(title: 'Main Menu')));
+            builder: (context) =>
+                SearchingForDevicesPage(title: 'Searching for Devices')));
     // get batch info
     /*   Batch.timestamp = DateTime.now();
     Batch.sessions = [];
