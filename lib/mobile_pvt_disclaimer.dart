@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_launcher_icons/main.dart';
+import 'SearchingForDevicesPage.dart';
 import 'main.dart';
 import 'main_menu.dart';
 
@@ -86,11 +87,17 @@ class DisclaimerPage extends StatelessWidget {
   }
 
   void onIAgreePressed(BuildContext context) {
-    Navigator.pushReplacement(
+    /*Navigator.pushReplacement(
         //pushes to main menu & replaces disclaimer with main menu at top of the stack
         context,
         MaterialPageRoute(
-            builder: (context) => const MainMenu(title: 'Main Menu')));
+            builder: (context) => const MainMenu(title: 'Main Menu')));*/
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            //builder: (context) => const MainMenu(title: 'Main Menu')));
+            builder: (context) =>
+                SearchingForDevicesPage(title: 'Searching for Devices')));
     // get batch info
     /*   Batch.timestamp = DateTime.now();
     Batch.sessions = [];

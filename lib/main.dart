@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 //import 'package:mobile_pvt/password_page.dart';
 import 'package:mobile_pvt/mobile_pvt_disclaimer.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 //import 'package:flutter_launcher_icons/main.dart';
-
+FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
 void main() {
