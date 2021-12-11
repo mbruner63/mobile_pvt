@@ -39,6 +39,7 @@ class _CountdownPageState extends State<CountdownPage> {
       t.cancel();
       startTime = DateTime.now();
       Future.delayed(const Duration(milliseconds: 300), () {
+        //Navigator.pushReplacement(context,
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return SessionPage(title: 'PVT Session Page');
@@ -57,10 +58,44 @@ class _CountdownPageState extends State<CountdownPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PVT - Countdown'),
-        // backgroundColor: Colors.grey.shade800,
+        title: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: const Text(
+            'PVT - Countdown',
+            // style: TextStyle(fontSize: 20),
+          ),
+        ),
+        // title: const Text('PVT Session in Progress'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 75,
+              // child: Image.asset(
+              //   'assets/images/icon.png',
+              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
+            ),
+          ),
+        ],
+        //backgroundColor: Colors.grey.shade800,
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
+      // appBar: AppBar(
+      //   title: const Text('PVT - Countdown'),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(4.0),
+      //       child: Container(
+      //         width: 75,
+      //         child: Image.asset(
+      //           'assets/images/CliniLogo_Lt.png',
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      //   // backgroundColor: Colors.grey.shade800,
+      // ),
+      //backgroundColor: Theme.of(context).backgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +127,7 @@ class _CountdownPageState extends State<CountdownPage> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                  child: Text('CANCEL SESSION',
-                      style: Theme.of(context).textTheme.headline6),
+                  child: Text('CANCEL SESSION', style: TextStyle(fontSize: 18)),
                 ),
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(

@@ -73,10 +73,29 @@ class _SessionPageState extends State<SessionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PVT Session in Progress'),
+        title: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: const Text(
+            'PVT Session in Progress',
+            // style: TextStyle(fontSize: 20),
+          ),
+        ),
+        // title: const Text('PVT Session in Progress'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 75,
+              // child: Image.asset(
+              //   'assets/images/icon.png',
+              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
+            ),
+          ),
+        ],
         //backgroundColor: Colors.grey.shade800,
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
+      //backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         constraints: const BoxConstraints.expand(),
         child: Column(
@@ -118,7 +137,7 @@ class _SessionPageState extends State<SessionPage> {
                                       },
                                       child: const Image(
                                           image: AssetImage(
-                                              'assets/images/pvt_target3.png')),
+                                              'assets/images/pvt_target5.png')),
                                     )
                                   : null),
                         ),
@@ -142,8 +161,7 @@ class _SessionPageState extends State<SessionPage> {
                         MaterialStateProperty.all<Color>(Colors.red.shade800)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text('ABORT SESSION',
-                      style: Theme.of(context).textTheme.headline6),
+                  child: Text('ABORT SESSION', style: TextStyle(fontSize: 18)),
                 ),
                 onPressed: () async {
                   Navigator.pushAndRemoveUntil(

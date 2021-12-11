@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_launcher_icons/main.dart';
-
+import 'main.dart';
 import 'main_menu.dart';
 
 class DisclaimerPage extends StatelessWidget {
@@ -11,10 +11,26 @@ class DisclaimerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mobile PVT - DISCLAIMER'),
+        title: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: const Text(
+            'Mobile PVT - DISCLAIMER',
+            // style: TextStyle(fontSize: 20),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 75,
+              // child: Image.asset(
+              //   'assets/appbar_red.png',
+              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
+            ),
+          ),
+        ],
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      //scaffoldBackgroundColor: Theme.of(context).backgroundColor,
       body: Center(
         child: ListView(
           //mainAxisAlignment: MainAxisAlignment.start,
@@ -41,17 +57,19 @@ class DisclaimerPage extends StatelessWidget {
                     constraints: BoxConstraints(
                         minWidth: (MediaQuery.of(context).size.width - 10) / 4),
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue.shade900),
-                        //backgroundColor: MaterialStateProperty.all<Color>(
-                        //Theme.of(context).primaryColor)
-                      ),
+                      // style: ButtonStyle(
+                      //   backgroundColor: MaterialStateProperty.all<Color>(
+                      //       Colors.blue.shade900),
+                      //   //backgroundColor: MaterialStateProperty.all<Color>(
+                      //   //Theme.of(context).primaryColor)
+                      // ),
                       //Theme.of(context).primaryColor)),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text('I AGREE',
-                            style: Theme.of(context).textTheme.headline5),
+                        child: Text(
+                          'I AGREE',
+                          style: TextStyle(fontSize: 24),
+                        ),
                       ),
                       onPressed: () {
                         onIAgreePressed(context);
@@ -69,6 +87,7 @@ class DisclaimerPage extends StatelessWidget {
 
   void onIAgreePressed(BuildContext context) {
     Navigator.pushReplacement(
+        //pushes to main menu & replaces disclaimer with main menu at top of the stack
         context,
         MaterialPageRoute(
             builder: (context) => const MainMenu(title: 'Main Menu')));
