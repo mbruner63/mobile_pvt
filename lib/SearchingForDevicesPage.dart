@@ -11,7 +11,7 @@ class SearchingForDevicesPage extends StatefulWidget {
   SearchingForDevicesPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  Map<String, String>? PvtDeviceMap = {};
+  Map<String, BluetoothDevice>? PvtDeviceMap = {};
 
   @override
   _SearchingForDevicesPageState createState() =>
@@ -30,10 +30,10 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
   late Timer _waitingToConnectTimer;
   int _waitingToConnectCountdown = 10;
 
-  _addDeviceToMap(String address, String name) {
+  _addDeviceToMap(String address, BluetoothDevice device) {
     if (!widget.PvtDeviceMap!.containsKey(address)) {
       setState(() {
-        widget.PvtDeviceMap!.addEntries([new MapEntry(address, name)]);
+        widget.PvtDeviceMap!.addEntries([new MapEntry(address, device)]);
       });
     }
     // if (!widget.devicesList.contains(device)) {
@@ -56,7 +56,7 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
         if (r.device.name.length > 1) {
           if ((r.device.name[0] == 'A') && (r.device.name[1] == 'P')) {
             print('${r.device.name} found! ${r.device.id} rssi: ${r.rssi}');
-            _addDeviceToMap("${r.device.id}", r.device.name);
+            _addDeviceToMap("${r.device.id}", r.device);
           }
         }
       }
@@ -170,7 +170,7 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
 
   NestedScrollView _buildNestedScrollViewOfDevices() {
     List<Container> containers = [];
-    widget.PvtDeviceMap?.forEach((address, name) {
+    widget.PvtDeviceMap?.forEach((address, device) {
       String buttonText = 'CONNECT';
       containers.add(Container(
           height: 60,
@@ -181,7 +181,7 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(name == '' ? '(unknown device' : name),
+                    Text(device.name == '' ? '(unknown device' : device.name),
                     Text(address)
                   ],
                 ),
@@ -197,7 +197,7 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
                         child: Text(buttonText,
                             style: Theme.of(context).textTheme.headline6),
                       ),
-                      onPressed: () async {
+                      onPressed: () {
                         _waitingToConnectCountdown = 30;
                         // _waitingToConnectTimer = Timer.periodic(
                         //     Duration(seconds: 1), waitingToConnectTimerCB);
@@ -206,6 +206,11 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
                           _connectingAddress = address;
                           _connecting = true;
                           _searchInProgress = false;
+                          try {
+                            device.connect(timeout: Duration(seconds: 10));
+                          } catch (e) {
+                            print("connection failed");
+                          }
                         });
                       }),
             ],
