@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_pvt/main_menu.dart';
 //import 'package:toggle_switch/toggle_switch.dart';
 //import '/main.dart';
+import 'PVTData.dart';
 import 'main.dart';
 
 List<int> sessionTimes = [60, 180, 300, 600];
@@ -21,6 +22,18 @@ class _ConfigPageState extends State<ConfigPage> {
   _ConfigPageState() {}
   int i = 5;
   List<bool> isSelected = [true, false, false, false];
+  final EI_Controller = TextEditingController();
+  final SID_Controller = TextEditingController();
+  final SI_Controller = TextEditingController();
+  final Email_Controller = TextEditingController();
+  @override
+  void dispose() {
+    EI_Controller.dispose();
+    SID_Controller.dispose();
+    SI_Controller.dispose();
+    Email_Controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +155,7 @@ class _ConfigPageState extends State<ConfigPage> {
 
                                 sessionLengthIndex = newIndex;
                                 sessionTime = sessionTimes[newIndex];
+                                pvt_data.Trial_length = sessionTime;
                                 print("Session time = $sessionTime");
                               },
                               children: <Widget>[
@@ -224,6 +238,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     child: TextField(
+                      controller: EI_Controller,
                       cursorColor: Colors.grey,
                       cursorHeight: 30,
                       maxLines: 1,
@@ -258,6 +273,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     child: TextField(
+                      controller: SID_Controller,
                       cursorColor: Colors.grey,
                       cursorHeight: 30,
                       maxLines: 1,
@@ -292,6 +308,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     child: TextField(
+                      controller: SI_Controller,
                       cursorColor: Colors.grey,
                       cursorHeight: 30,
                       maxLines: 1,
@@ -328,6 +345,7 @@ class _ConfigPageState extends State<ConfigPage> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                     child: TextField(
+                      controller: Email_Controller,
                       cursorColor: Colors.grey,
                       cursorHeight: 30,
                       maxLines: 1,
@@ -371,6 +389,11 @@ class _ConfigPageState extends State<ConfigPage> {
                       ),
                       onPressed: () {
                         // Navigator.pop(context);
+                        pvt_data.E_Initials = EI_Controller.text;
+                        pvt_data.S_Initials = SI_Controller.text;
+                        pvt_data.S_ID = SID_Controller.text;
+                        pvt_data.Main_Email = Email_Controller.text;
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(

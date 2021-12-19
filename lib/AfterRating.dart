@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
+import 'PVTData.dart';
+import 'PVTFile.dart';
 import 'main.dart';
 
 class PostRatingPage extends StatefulWidget {
@@ -100,6 +102,8 @@ class _PostRatingPageState extends State<PostRatingPage> {
                           onChanged: (double value) {
                             setState(() {
                               _currentSliderValue = value;
+                              pvt_data.After_Rating =
+                                  _currentSliderValue.toInt();
                             });
                           },
                         )),
@@ -131,6 +135,7 @@ class _PostRatingPageState extends State<PostRatingPage> {
                       // },
                       onPressed: () {
                         //was .push
+                        writePVTFile();
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

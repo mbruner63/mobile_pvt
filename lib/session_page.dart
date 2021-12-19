@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'PVTData.dart';
 import 'main.dart';
 import 'main_menu.dart';
 import 'AfterRating.dart';
@@ -23,16 +24,19 @@ class _SessionPageState extends State<SessionPage> {
   bool showTime = false;
   late int _delay = 0;
   int startMilliseconds = 0;
-  List<int> reactionTimes = [];
+  //List<int> reactionTimes = [];
   int reactionTime = 0;
   int session_start_milliseconds = 0;
   int running_milliseconds = 0;
-  List<int> stimulationTimes = [];
+  //List<int> stimulationTimes = [];
+
   late Random rnd;
   bool enabled = false;
   late int _secondsRemaining;
   @override
   void initState() {
+    pvt_data.ResetData();
+    pvt_data.Set_Date_Time();
     super.initState();
     rnd = Random();
     _delay = 1 + rnd.nextInt(9);
@@ -52,8 +56,9 @@ class _SessionPageState extends State<SessionPage> {
           setState(() {
             showTarget = true;
             startMilliseconds = DateTime.now().millisecondsSinceEpoch;
-            stimulationTimes.add(DateTime.now().millisecondsSinceEpoch -
-                session_start_milliseconds);
+            pvt_data.stimulationTimes.add(
+                DateTime.now().millisecondsSinceEpoch -
+                    session_start_milliseconds);
           });
         }
       }
@@ -131,7 +136,8 @@ class _SessionPageState extends State<SessionPage> {
                                           reactionTime = DateTime.now()
                                                   .millisecondsSinceEpoch -
                                               startMilliseconds;
-                                          reactionTimes.add(reactionTime);
+                                          pvt_data.reactionTimes
+                                              .add(reactionTime);
                                           _delay = 1 + rnd.nextInt(9);
                                         });
                                       },

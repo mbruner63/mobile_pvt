@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
+import 'PVTData.dart';
 import 'main.dart';
 
 class RatingPage extends StatefulWidget {
@@ -120,6 +121,8 @@ class _RatingPageState extends State<RatingPage> {
                           onChanged: (double value) {
                             setState(() {
                               _currentSliderValue = value;
+                              pvt_data.Before_Rating =
+                                  _currentSliderValue.toInt();
                             });
                           },
                         )),
