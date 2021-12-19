@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'PVTData.dart';
 import 'main.dart';
 import 'main_menu.dart';
 import 'AfterRating.dart';
@@ -15,6 +16,9 @@ class SessionPage extends StatefulWidget {
   _SessionPageState createState() => _SessionPageState();
 }
 
+List<int> reactionTimes = [];
+List<int> stimulationTimes = [];
+
 class _SessionPageState extends State<SessionPage> {
   _SessionPageState() {}
 
@@ -23,20 +27,24 @@ class _SessionPageState extends State<SessionPage> {
   bool showTime = false;
   late int _delay = 0;
   int startMilliseconds = 0;
-  List<int> reactionTimes = [];
+
   int reactionTime = 0;
   int session_start_milliseconds = 0;
   int running_milliseconds = 0;
-  List<int> stimulationTimes = [];
+
   late Random rnd;
   bool enabled = false;
   late int _secondsRemaining;
   @override
   void initState() {
     super.initState();
+    pvt_data.Set_Date_Time();
+    reactionTimes = [];
+    stimulationTimes = [];
     rnd = Random();
     _delay = 1 + rnd.nextInt(9);
     _secondsRemaining = sessionTime;
+
     session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
     _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
   }

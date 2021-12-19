@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
+import 'PVTFile.dart';
 import 'main.dart';
 
 class PostRatingPage extends StatefulWidget {
@@ -14,8 +15,9 @@ class PostRatingPage extends StatefulWidget {
   _PostRatingPageState createState() => _PostRatingPageState();
 }
 
+double AfterRating = 5;
+
 class _PostRatingPageState extends State<PostRatingPage> {
-  double _currentSliderValue = 5;
   _PostRatingPageState() {}
   int i = 5;
 
@@ -65,7 +67,7 @@ class _PostRatingPageState extends State<PostRatingPage> {
                           vertical: 8, horizontal: 16),
                       child: Text(
                         ' Post session, how do you feel?\n'
-                        ' $_currentSliderValue',
+                        ' $AfterRating',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                         //style: Theme.of(context).textTheme.headline6,
@@ -78,14 +80,14 @@ class _PostRatingPageState extends State<PostRatingPage> {
                             vertical: 8, horizontal: 24),
                         child: Slider(
                           // activeColor: Colors.blue.shade900,
-                          value: _currentSliderValue,
+                          value: AfterRating,
                           min: 1,
                           max: 10,
                           divisions: 9,
-                          label: _currentSliderValue.round().toString(),
+                          label: AfterRating.round().toString(),
                           onChanged: (double value) {
                             setState(() {
-                              _currentSliderValue = value;
+                              AfterRating = value;
                             });
                           },
                         )),
@@ -115,7 +117,9 @@ class _PostRatingPageState extends State<PostRatingPage> {
                       // onPressed: () {
                       //   Navigator.pop(context);
                       // },
-                      onPressed: () {
+                      onPressed: () async {
+                        await writePVTFile();
+                        readPVTFile();
                         //was .push
                         Navigator.pushReplacement(
                             context,

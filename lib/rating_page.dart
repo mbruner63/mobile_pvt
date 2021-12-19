@@ -15,8 +15,9 @@ class RatingPage extends StatefulWidget {
   _RatingPageState createState() => _RatingPageState();
 }
 
+double BeforeRating = 5;
+
 class _RatingPageState extends State<RatingPage> {
-  double _currentSliderValue = 5;
   _RatingPageState() {}
   int i = 5;
 
@@ -102,7 +103,7 @@ class _RatingPageState extends State<RatingPage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
                       child: Text(
-                        '         How do you feel? $_currentSliderValue',
+                        '         How do you feel? $BeforeRating',
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.justify,
                       ),
@@ -112,14 +113,14 @@ class _RatingPageState extends State<RatingPage> {
                             vertical: 8, horizontal: 24),
                         child: Slider(
                           //  activeColor: Colors.blue.shade900,
-                          value: _currentSliderValue,
+                          value: BeforeRating,
                           min: 1,
                           max: 10,
                           divisions: 9,
-                          label: _currentSliderValue.round().toString(),
+                          label: BeforeRating.round().toString(),
                           onChanged: (double value) {
                             setState(() {
-                              _currentSliderValue = value;
+                              BeforeRating = value;
                             });
                           },
                         )),
