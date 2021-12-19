@@ -20,7 +20,7 @@ class PVT_Data {
 
   void Set_Date_Time() {
     final DateTime now = DateTime.now();
-    final DateFormat formatter = DateFormat('MM/dd/yyyy');
+    final DateFormat formatter = DateFormat('MM/dd/yy');
     final String formatted = formatter.format(now);
     Trial_Date = formatted;
     final DateFormat timeFormatter = DateFormat('hhmm');

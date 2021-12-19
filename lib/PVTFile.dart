@@ -50,43 +50,44 @@ Future<File> writePVTFile() async {
   print("writing file");
   try {
     await file.writeAsString("hey hey my my");
-    file.writeAsStringSync("\n\"PVT DATA\" \n");
-    file.writeAsStringSync("\"STUDY: \", \"$pvt_data.Study\" \n",
+    file.writeAsStringSync("\r\n\"PVT DATA\" \r\n");
+    file.writeAsStringSync("\"STUDY: \", \"${pvt_data.Study}\" \r\n",
         mode: FileMode.append);
     file.writeAsStringSync(
-        "\"SLEEPY PRE, POST TRIAL: \",$pvt_data.Before_Rating,$pvt_data.After_Rating\n",
+        "\"SLEEPY PRE, POST TRIAL: \",${pvt_data.Before_Rating},${pvt_data.After_Rating}\r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"E. INITIALS:\", \"$pvt_data.E_Initials\"\n",
+    file.writeAsStringSync("\"E. INITIALS:\", \"${pvt_data.E_Initials}\"\r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"S. INITIALS:\", \"$pvt_data.S_Initials\"\n",
+    file.writeAsStringSync("\"S. INITIALS:\", \"${pvt_data.S_Initials}\"\r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"S. ID NUMBER:\", \"$pvt_data.S_ID\"\n",
+    file.writeAsStringSync("\"S. ID NUMBER:\", ${pvt_data.S_ID}\r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"TRIAL NUMBER:\", $pvt_data.Trial_Number \n",
+    file.writeAsStringSync("\"TRIAL NUMBER:\", ${pvt_data.Trial_Number} \r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"TRIAL DATE:\", \"$pvt_data.Trial_Date\"\n",
+    file.writeAsStringSync("\"TRIAL DATE:\", \"${pvt_data.Trial_Date}\"\r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"TRIAL TIME:\", \"$pvt_data.Trial_Time\" \n",
+    file.writeAsStringSync("\"TRIAL TIME:\", \"${pvt_data.Trial_Time}\" \r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"ISI MIN (ms):\", $pvt_data.ISI_Min  \n",
+    file.writeAsStringSync("\"ISI MIN (ms):\", ${pvt_data.ISI_Min}  \r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"ISI MAX (ms):\", $pvt_data.ISI_Max  \n",
+    file.writeAsStringSync("\"ISI MAX (ms):\", ${pvt_data.ISI_Max}  \r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"TRIAL LENGTH (s):\", $pvt_data.Trial_length \n",
+    file.writeAsStringSync(
+        "\"TRIAL LENGTH (s):\", ${pvt_data.Trial_length} \r\n",
         mode: FileMode.append);
-    file.writeAsStringSync("\"TASK:\", \"H\" \n", mode: FileMode.append);
-    file.writeAsStringSync("\"HAND: \",\"R\" \n", mode: FileMode.append);
-    file.writeAsStringSync("\"PVT S/N:\", $pvt_data.PVT_Serial_Num\n",
+    file.writeAsStringSync("\"TASK:\", \"H\" \r\n", mode: FileMode.append);
+    file.writeAsStringSync("\"HAND: \",\"R\" \r\n", mode: FileMode.append);
+    file.writeAsStringSync("\"PVT S/N:\", ${pvt_data.PVT_Serial_Num}\r\n",
         mode: FileMode.append);
 
     int i;
     for (i = 0; i < pvt_data.reactionTimes.length; i++) {
       double mytime = pvt_data.stimulationTimes[i] / 1000;
       file.writeAsStringSync(
-          "${pvt_data.reactionTimes[i]}," + mytime.toStringAsFixed(1) + "\n",
+          "${pvt_data.reactionTimes[i]}," + mytime.toStringAsFixed(1) + "\r\n",
           mode: FileMode.append);
     }
-    file.writeAsStringSync("0, 0\n", mode: FileMode.append);
+    file.writeAsStringSync("0, 0\r\n", mode: FileMode.append);
   } catch (e) {
     print("error writing file");
   }
