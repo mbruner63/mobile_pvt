@@ -37,10 +37,10 @@ class _RatingPageState extends State<RatingPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              // child: Image.asset(
-              //   'assets/images/icon.png',
-              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
-              // ),
+              child: Image.asset(
+                //   'assets/images/icon.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
             ),
           ),
         ],
@@ -102,7 +102,7 @@ class _RatingPageState extends State<RatingPage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
                       child: Text(
-                        '         How do you feel? $_currentSliderValue',
+                        '         How do you feel?   $_currentSliderValue',
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.justify,
                       ),

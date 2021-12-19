@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: 'Mobile PVT POC App',
-      debugShowCheckedModeBanner: false,
+      //debugShowCheckedModeBanner: false,
 //aqua blue theme
       theme: FlexThemeData.light(
         scheme: FlexScheme.aquaBlue,

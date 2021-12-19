@@ -29,10 +29,10 @@ class _PostRatingPageState extends State<PostRatingPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              // child: Image.asset(
-              //   'assets/images/appbar_red.png',
-              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
-              // ),
+              child: Image.asset(
+                //   'assets/images/appbar_red.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
             ),
           ),
         ],
@@ -63,14 +63,28 @@ class _PostRatingPageState extends State<PostRatingPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
-                      child: Text(
-                        ' Post session, how do you feel?\n'
-                        ' $_currentSliderValue',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                        //style: Theme.of(context).textTheme.headline6,
-                        //.of(context).textTheme.headline6,
-                        textAlign: TextAlign.center,
+                      child: Container(
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            ' Post session, how do you feel?  '
+                            ' $_currentSliderValue',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                            //style: Theme.of(context).textTheme.headline6,
+                            //.of(context).textTheme.headline6,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        // child: Text(
+                        //   ' Post session, how do you feel?\n'
+                        //   ' $_currentSliderValue',
+                        //   style: TextStyle(
+                        //       fontSize: 18, fontWeight: FontWeight.bold),
+                        //   //style: Theme.of(context).textTheme.headline6,
+                        //   //.of(context).textTheme.headline6,
+                        //   textAlign: TextAlign.center,
+                        // ),
                       ),
                     ),
                     Padding(

@@ -59,8 +59,8 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#303030"
-  #image: assets/CliniLabs_light.png
-  image: assets/splash.png
+  image: assets/images/CliniLabs_light.png
+  #image: assets/splash.png
   android: true
   ios: true
   #web: true

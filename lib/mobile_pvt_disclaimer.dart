@@ -24,10 +24,10 @@ class DisclaimerPage extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              // child: Image.asset(
-              //   'assets/appbar_red.png',
-              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
-              // ),
+              child: Image.asset(
+                //   'assets/appbar_red.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
             ),
           ),
         ],
@@ -95,9 +95,10 @@ class DisclaimerPage extends StatelessWidget {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            //builder: (context) => const MainMenu(title: 'Main Menu')));
-            builder: (context) =>
-                SearchingForDevicesPage(title: 'Searching for Devices')));
+            builder: (context) => const MainMenu(title: 'Main Menu')));
+
+    // builder: (context) =>
+    //     SearchingForDevicesPage(title: 'Searching for Devices')));
     // get batch info
     /*   Batch.timestamp = DateTime.now();
     Batch.sessions = [];

@@ -59,10 +59,10 @@ class _ConfigPageState extends State<ConfigPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              // child: Image.asset(
-              //   'assets/images/icon.png',
-              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
-              // ),
+              child: Image.asset(
+                //   'assets/images/icon.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
             ),
           ),
         ],
@@ -72,7 +72,7 @@ class _ConfigPageState extends State<ConfigPage> {
           shrinkWrap: true,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
@@ -89,14 +89,17 @@ class _ConfigPageState extends State<ConfigPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 0), //.all(4),
                       child: Text(
                         'Session length',
-                        style: Theme.of(context).textTheme.headline6,
+                        //style: Theme.of(context).textTheme.subtitle1,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+                      padding: const EdgeInsets.fromLTRB(0, 4, 0, 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         //crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +117,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             // color: Colors.grey.shade600, //unselected bg color
                             child: ToggleButtons(
                               isSelected: isSelected,
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(16),
                               //
                               // color: Colors.grey.shade400, //unselected text
                               // disabledColor: Colors.grey,
@@ -202,7 +205,7 @@ class _ConfigPageState extends State<ConfigPage> {
 
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,8 +214,10 @@ class _ConfigPageState extends State<ConfigPage> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                     child: Text(
-                      "Experimenter ID",
-                      style: Theme.of(context).textTheme.headline6,
+                      "Experimenter Initials",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      //style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
                   Padding(
@@ -223,7 +228,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       cursorHeight: 30,
                       maxLines: 1,
                       maxLength: 3,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: TextStyle(fontWeight: FontWeight.normal),
                       decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide:
@@ -244,7 +249,9 @@ class _ConfigPageState extends State<ConfigPage> {
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                     child: Text(
                       "Subject ID",
-                      style: Theme.of(context).textTheme.headline6,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      // style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
                   Padding(
@@ -254,8 +261,8 @@ class _ConfigPageState extends State<ConfigPage> {
                       cursorColor: Colors.grey,
                       cursorHeight: 30,
                       maxLines: 1,
-                      maxLength: 3,
-                      style: Theme.of(context).textTheme.headline6,
+                      maxLength: 4,
+                      style: TextStyle(fontWeight: FontWeight.normal),
                       decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide:
@@ -271,46 +278,85 @@ class _ConfigPageState extends State<ConfigPage> {
                       onChanged: (text) {},
                     ),
                   ),
-                  // Padding(     //THIS AREA FOR EMAIL ADDRESS FOR SENDING DATA FILES
-                  //   padding:
-                  //       const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                  //   child: Text(
-                  //     "Send Data to this e-mail",
-                  //     style: Theme.of(context).textTheme.headline6,
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding:
-                  //       const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-                  //   child: TextField(
-                  //     cursorColor: Colors.grey,
-                  //     cursorHeight: 30,
-                  //     maxLines: 1,
-                  //     maxLength: 3,
-                  //     style: Theme.of(context).textTheme.headline6,
-                  //     decoration: const InputDecoration(
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderSide:
-                  //             const BorderSide(color: Colors.grey, width: 2),
-                  //         borderRadius:
-                  //             const BorderRadius.all(Radius.circular(16)),
-                  //       ),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius:
-                  //             const BorderRadius.all(Radius.circular(8.0)),
-                  //       ),
-                  //     ),
-                  //     onChanged: (text) {},
-                  //   ),
-                  // ),    //END OF AREA FOR EMAIL ADDRESS FOR SENDING DATA FILES
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    child: Text(
+                      "Subject Initials",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      // style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                    child: TextField(
+                      cursorColor: Colors.grey,
+                      cursorHeight: 30,
+                      maxLines: 1,
+                      maxLength: 3,
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                  ),
+
+                  Padding(
+                    //THIS AREA FOR EMAIL ADDRESS FOR SENDING DATA FILES
+                    //right now can only enter email, does not send nor validate
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    child: Text(
+                      "Send Data to this e-mail",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                    child: TextField(
+                      cursorColor: Colors.grey,
+                      cursorHeight: 30,
+                      maxLines: 1,
+                      // maxLength: 50,
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                      //style: Theme.of(context).textTheme.headline6,
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                      ),
+                      onChanged: (text) {},
+                    ),
+                  ), //END OF EMAIL AREA
                 ],
               ),
             ), // User Notes
 
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Column(
                   children: [
                     ElevatedButton.icon(

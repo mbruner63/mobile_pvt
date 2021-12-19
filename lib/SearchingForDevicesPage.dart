@@ -79,11 +79,29 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mobile PVT'),
+        title: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: const Text(
+            'Mobile PVT - Connect Device',
+            // style: TextStyle(fontSize: 20),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 75,
+              child: Image.asset(
+                //'assets/appbar_red.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
+            ),
+          ),
+        ],
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
         child: ListView(
+          //BEGINNING OF ORIG was all in body:Center(
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -99,12 +117,30 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+              child: Container(
+                decoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                //width: 50,
+                //height: 50,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(22, 4, 0, 4),
+                  child: Text('Available Devices:',
+                      style: TextStyle(fontSize: 26, color: Colors.white)),
+                ),
+                //backgroundColor: Theme.of(context).backgroundColor,
+              ),
+            ),
             _connecting
-                ? Center(
-                    child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator()),
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator()),
+                    ),
                   )
                 : Container(
                     height: 200,
@@ -119,55 +155,77 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
             Container(
               child: _connecting
                   ? null
-                  : ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Theme.of(context).primaryColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text('USE MOBILE DEVICE ',
-                            style: Theme.of(context).textTheme.headline5),
-                      ),
-                      onPressed: () async {
-                        //MetaWearSDK.stopLeDeviceScan();
-                        //Batch.isMbientBatch = false;
-                        Navigator.pushReplacement(
-                            //pushes to main menu & replaces disclaimer with main menu at top of the stack
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const MainMenu(title: 'Main Menu')));
-                      },
+                  : Column(
+                      //column and container with box constraints added for btn sz
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                              minWidth:
+                                  (MediaQuery.of(context).size.width - 10) / 2),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                // backgroundColor: MaterialStateProperty.all<Color>(
+                                //     Theme.of(context).primaryColor)
+                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text('USE MOBILE DEVICE ',
+                                  style: TextStyle(fontSize: 22)),
+                            ),
+                            onPressed: () async {
+                              //MetaWearSDK.stopLeDeviceScan();
+                              //Batch.isMbientBatch = false;
+                              Navigator.pushReplacement(
+                                  //pushes to main menu & replaces disclaimer with main menu at top of the stack
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MainMenu(title: 'Main Menu')));
+                            },
+                          ),
+                        ),
+                      ],
                     ),
             ),
             Container(
               margin: EdgeInsets.only(top: 20),
               child: _connecting
                   ? null
-                  : ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Theme.of(context).primaryColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text('RESCAN',
-                            style: Theme.of(context).textTheme.headline5),
-                      ),
-                      onPressed: () {
-                        //MetaWearSDK.scanLeDevice();
-                        _searchingTimerCountdown = 10;
-                        setState(() {
-                          _searchInProgress = true;
-                        });
-                        _searchingTimer = Timer.periodic(
-                            Duration(seconds: 1), searchingTimerCB);
-                      },
+                  : Column(
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                              minWidth:
+                                  (MediaQuery.of(context).size.width - 10) / 2),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                // backgroundColor: MaterialStateProperty.all<Color>(
+                                //     Theme.of(context).primaryColor)
+                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text('RESCAN',
+                                  style: TextStyle(fontSize: 22)),
+                            ),
+                            onPressed: () {
+                              //MetaWearSDK.scanLeDevice();
+                              _searchingTimerCountdown = 10;
+                              setState(() {
+                                _searchInProgress = true;
+                              });
+                              _searchingTimer = Timer.periodic(
+                                  Duration(seconds: 1), searchingTimerCB);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
             ),
           ],
         ),
-      ),
+      ), //END OF ORIG
     );
+    //);
   }
 
   NestedScrollView _buildNestedScrollViewOfDevices() {
@@ -192,12 +250,12 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
                   ? CircularProgressIndicator()
                   : ElevatedButton(
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Theme.of(context).primaryColor)),
+                          // backgroundColor: MaterialStateProperty.all<Color>(
+                          //     Theme.of(context).primaryColor)
+                          ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text(buttonText,
-                            style: Theme.of(context).textTheme.headline6),
+                        child: Text(buttonText, style: TextStyle(fontSize: 22)),
                       ),
                       onPressed: () {
                         _waitingToConnectCountdown = 30;
@@ -224,9 +282,17 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
           return _connecting
               ? <Widget>[]
               : <Widget>[
-                  SliverAppBar(
-                    title: Text('Found Devices'),
-                  )
+                  // SliverAppBar(
+                  //     title: Text('Available Devices'),
+                  //     leading: IconButton(
+                  //       icon: Icon(
+                  //         Icons.bluetooth,
+                  //         color: Colors.white,
+                  //       ),
+                  //       onPressed: () {
+                  //         // do something
+                  //       },
+                  //     ))
                 ];
         },
         body: ListView(

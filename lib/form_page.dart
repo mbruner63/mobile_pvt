@@ -19,7 +19,7 @@ class _FormPageState extends State<FormPage> {
 
   //TextController to read text entered in text field
   // TextEditingController password = TextEditingController();
-  String password = '69420';
+  String password = 'amipvt'; //'69420';
   TextEditingController confirmpassword = TextEditingController();
 
   //final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -42,10 +42,10 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              // child: Image.asset(
-              //   'assets/images/icon.png',
-              //   // 'assets/images/CliniLogo_Lt.png', //CLINILABS
-              // ),
+              child: Image.asset(
+                //   'assets/images/icon.png',
+                'assets/images/CliniLogo_Lt.png', //CLINILABS
+              ),
             ),
           ),
         ],
