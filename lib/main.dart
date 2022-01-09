@@ -5,12 +5,32 @@ import 'package:flutter/services.dart';
 import 'package:mobile_pvt/mobile_pvt_disclaimer.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
 //import 'package:flutter_launcher_icons/main.dart';
 FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
-void main() {
+String deviceID = "Blah";
+
+Future<void> setup_deviceID() async {
+  String? _deviceId;
+  BigInt mynum;
+  try {
+    _deviceId = await PlatformDeviceId.getDeviceId;
+  } on PlatformException {
+    _deviceId = '0123456789abcdef';
+  }
+  mynum = BigInt.parse(_deviceId!, radix: 16);
+  deviceID = mynum.toString();
+  print(_deviceId);
+  print(deviceID);
+}
+
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup_deviceID();
+  print(deviceID);
   runApp(const MyApp());
 }
 

@@ -169,7 +169,7 @@ class _FormPageState extends State<FormPage> {
                           //   //FormField.initialValue;
                           //   _formKey?.currentState?.reset();
                           //   confirmpassword.text = '';
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ConfigPage(

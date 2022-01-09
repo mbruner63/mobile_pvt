@@ -393,13 +393,13 @@ class _ConfigPageState extends State<ConfigPage> {
                         pvt_data.S_Initials = SI_Controller.text;
                         pvt_data.S_ID = SID_Controller.text;
                         pvt_data.Main_Email = Email_Controller.text;
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    //  ConfigPage(title: 'PVT - Configure Session')));
-                                    MainMenu(title: 'Main Menu')));
+                        Navigator.pop(context);
+                        // Navigator.pop(context);pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             //  ConfigPage(title: 'PVT - Configure Session')));
+                        //             MainMenu(title: 'Main Menu')));
                       },
                     ),
                   ],
