@@ -7,26 +7,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
+import 'Copy_protection.dart';
+
 //import 'package:flutter_launcher_icons/main.dart';
 FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
-String deviceID = "Blah";
-
-Future<void> setup_deviceID() async {
-  String? _deviceId;
-  BigInt mynum;
-  try {
-    _deviceId = await PlatformDeviceId.getDeviceId;
-  } on PlatformException {
-    _deviceId = '0123456789abcdef';
-  }
-  mynum = BigInt.parse(_deviceId!, radix: 16);
-  deviceID = mynum.toString();
-  print(_deviceId);
-  print(deviceID);
-}
-
+Widget startPage = DisclaimerPage();
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup_deviceID();
@@ -123,7 +110,7 @@ class MyApp extends StatelessWidget {
 //           textTheme: const TextTheme(
 //               headline4: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
 //       ),
-      home: const DisclaimerPage(),
+      home: startPage,
     );
   }
 }
