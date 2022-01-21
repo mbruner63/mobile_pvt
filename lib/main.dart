@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
 //           textTheme: const TextTheme(
 //               headline4: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
 //       ),
+
       home: const DisclaimerPage(),
     );
   }

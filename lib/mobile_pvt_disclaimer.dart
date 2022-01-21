@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_pvt/register_form.dart';
 //import 'package:flutter_launcher_icons/main.dart';
 import 'SearchingForDevicesPage.dart';
 import 'main.dart';
@@ -95,7 +96,8 @@ class DisclaimerPage extends StatelessWidget {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => const MainMenu(title: 'Main Menu')));
+            builder: (context) =>
+                RegisterForm(title: 'PVT - Register Device')));
 
     // builder: (context) =>
     //     SearchingForDevicesPage(title: 'Searching for Devices')));
