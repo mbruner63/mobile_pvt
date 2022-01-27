@@ -28,13 +28,14 @@ Future<bool> setup_deviceID() async {
     return false;
   }
   mynum = BigInt.parse(_deviceId!, radix: 16).toUnsigned(32);
+  _deviceId = mynum.toString();
   mynum =
       (~(mynum + BigInt.from(0x881963)) - BigInt.from(0x881963)).toUnsigned(32);
   deviceID = mynum.toString();
 
-  print("num1 $_deviceId");
-  print("num2 $deviceID");
-  print("My num $mynum");
+  print("Unencoded Id $_deviceId");
+  print("Encoded ID $deviceID");
+  //print("My num $mynum");
   return true;
 }
 
