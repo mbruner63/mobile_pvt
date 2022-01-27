@@ -17,6 +17,7 @@ Widget startPage = DisclaimerPage();
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup_deviceID();
+  await find_file();
   print(deviceID);
   runApp(const MyApp());
 }
