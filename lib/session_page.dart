@@ -20,9 +20,10 @@ class _SessionPageState extends State<SessionPage> {
   _SessionPageState() {}
 
   late Timer _timer;
+  late Timer ISI_timer;
   bool showTarget = false;
   bool showTime = false;
-  late int _delay = 0;
+  int ISI_delay = 0;
   int startMilliseconds = 0;
   //List<int> reactionTimes = [];
   int reactionTime = 0;
@@ -39,10 +40,26 @@ class _SessionPageState extends State<SessionPage> {
     pvt_data.Set_Date_Time();
     super.initState();
     rnd = Random();
-    _delay = 1 + rnd.nextInt(9);
+    //ISI_delay = 1 + rnd.nextInt(9);
     _secondsRemaining = sessionTime;
     session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
     _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
+    setISI();
+  }
+
+  void ISITimerCB() {
+    setState(() {
+      showTarget = true;
+      //targetShown = false;
+      startMilliseconds = DateTime.now().millisecondsSinceEpoch;
+      pvt_data.stimulationTimes.add(
+          DateTime.now().millisecondsSinceEpoch - session_start_milliseconds);
+    });
+  }
+
+  void setISI() {
+    ISI_delay = 1000 + rnd.nextInt(9000);
+    ISI_timer = Timer(Duration(milliseconds: ISI_delay), ISITimerCB);
   }
 
   void countdownTimerCB(Timer t) {
@@ -50,18 +67,6 @@ class _SessionPageState extends State<SessionPage> {
       setState(() {
         --_secondsRemaining;
       });
-      if (_delay > 0) {
-        --_delay;
-        if (_delay < 1) {
-          setState(() {
-            showTarget = true;
-            startMilliseconds = DateTime.now().millisecondsSinceEpoch;
-            pvt_data.stimulationTimes.add(
-                DateTime.now().millisecondsSinceEpoch -
-                    session_start_milliseconds);
-          });
-        }
-      }
     } else {
       t.cancel();
 
@@ -135,11 +140,13 @@ class _SessionPageState extends State<SessionPage> {
                                           showTarget = false;
                                           reactionTime = DateTime.now()
                                                   .millisecondsSinceEpoch -
-                                              startMilliseconds;
+                                              startMilliseconds -
+                                              150;
                                           pvt_data.reactionTimes
                                               .add(reactionTime);
-                                          _delay = 1 + rnd.nextInt(9);
+                                          //_delay = 1 + rnd.nextInt(9);
                                         });
+                                        setISI();
                                       },
                                       child: const Image(
                                           image: AssetImage(
@@ -187,7 +194,8 @@ class _SessionPageState extends State<SessionPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _timer.cancel();
+    ISI_timer.cancel();
+    super.dispose();
   }
 }
