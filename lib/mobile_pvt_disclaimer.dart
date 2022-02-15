@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_launcher_icons/main.dart';
+import 'Copy_protection.dart';
 import 'SearchingForDevicesPage.dart';
 import 'main.dart';
 import 'main_menu.dart';
@@ -14,8 +15,8 @@ class DisclaimerPage extends StatelessWidget {
       appBar: AppBar(
         title: FittedBox(
           fit: BoxFit.fitWidth,
-          child: const Text(
-            'Mobile PVT - DISCLAIMER',
+          child: Text(
+            'Mobile PVT - DISCLAIMER+$ucodedID',
             // style: TextStyle(fontSize: 20),
           ),
         ),

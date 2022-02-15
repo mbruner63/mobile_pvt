@@ -16,7 +16,7 @@ bool LicenseFileFound = false;
 bool LicenseActive = false;
 
 bool FileFound = false;
-
+String ucodedID = "Blank";
 String CodedId = "";
 Future<bool> setup_deviceID() async {
   //String? _deviceId;
@@ -29,6 +29,7 @@ Future<bool> setup_deviceID() async {
   try {
     String? deviceID = await PlatformDeviceId.getDeviceId;
     print("DeviceID prior to peppering $deviceID");
+    ucodedID = deviceID!;
   } on PlatformException {
     print('Failed to get platform version');
   }

@@ -13,12 +13,14 @@ import 'Copy_protection.dart';
 FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
+String realDeviceID = 'nothing';
 Widget startPage = DisclaimerPage();
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup_deviceID();
   await find_file();
   print(deviceID);
+  //realDeviceID = deviceID!;
   runApp(const MyApp());
 }
 
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
-      title: 'Mobile PVT POC App',
+      title: 'Mobile PVT POC App ',
       //debugShowCheckedModeBanner: false,
 //aqua blue theme
       theme: FlexThemeData.light(
