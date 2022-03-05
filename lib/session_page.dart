@@ -59,6 +59,7 @@ class _SessionPageState extends State<SessionPage> {
 
   void setISI() {
     ISI_delay = 1000 + rnd.nextInt(9000);
+
     ISI_timer = Timer(Duration(milliseconds: ISI_delay), ISITimerCB);
   }
 
@@ -128,32 +129,58 @@ class _SessionPageState extends State<SessionPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Center(child: Text('Time: $reactionTime')),
+                        Center(
+                          child: (reactionTime != 1)
+                              ? Text(
+                                  'Time: $reactionTime',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 34,
+                                      color: Colors.red),
+                                )
+                              : Text(
+                                  'False Start',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 34,
+                                      color: Colors.red),
+                                ),
+                        ),
                         Expanded(
                           child: FittedBox(
                               //width: 250,
                               //height: 250,
-                              child: showTarget
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          showTarget = false;
-                                          reactionTime = DateTime.now()
-                                                  .millisecondsSinceEpoch -
-                                              startMilliseconds -
-                                              150;
-                                          pvt_data.reactionTimes
-                                              .add(reactionTime);
-                                          //_delay = 1 + rnd.nextInt(9);
-                                        });
-                                        setISI();
-                                      },
-                                      child: const Image(
-                                          image: AssetImage(
-                                              'assets/images/pvt_target5.png')),
-                                    )
-                                  : null),
-                        ),
+                              child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (!showTarget) {
+                                  reactionTime = 1;
+                                  ISI_timer.cancel();
+                                } else {
+                                  reactionTime =
+                                      DateTime.now().millisecondsSinceEpoch -
+                                          startMilliseconds -
+                                          150;
+                                  showTarget = false;
+                                }
+
+                                if (reactionTime < 100) {
+                                  reactionTime = 1;
+                                }
+                                pvt_data.reactionTimes.add(reactionTime);
+                                //_delay = 1 + rnd.nextInt(9);
+                              });
+                              setISI();
+                            },
+                            child: showTarget
+                                ? const Image(
+                                    image: AssetImage(
+                                        'assets/images/pvt_target5.png'))
+                                : const Image(
+                                    image: AssetImage(
+                                        'assets/images/transparent.png')),
+                          )),
+                        )
                       ],
                     ),
                   ),

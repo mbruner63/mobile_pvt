@@ -16,7 +16,7 @@ class DisclaimerPage extends StatelessWidget {
         title: FittedBox(
           fit: BoxFit.fitWidth,
           child: Text(
-            'Mobile PVT - DISCLAIMER+$ucodedID',
+            'Mobile PVT - DISCLAIMER',
             // style: TextStyle(fontSize: 20),
           ),
         ),

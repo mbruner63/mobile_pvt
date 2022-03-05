@@ -99,63 +99,11 @@ Future<bool> find_file() async {
 
     return false;
   }
-  // try {
-  //
-  //
-  //   return true;
-  // } catch {
-  //   print('error with find_file');
-  //   return false;
-  // }
 }
 
 Future<File> get writeFile async {
-  //final path = await _localPath;
   final path = (await getExternalStorageDirectory())!.path;
   final file = deviceID;
   print('$path/$file.bin');
   return File('$path/$file.bin');
 }
-
-//Jordan's done
-
-// Future<bool> readPVTFile() async {
-//   try {
-//     final file = await _localFile;
-//     print("contents of PVT file");
-//     // Read the file
-//     final contents = await file.readAsString();
-//     print(contents);
-//
-//     return true;
-//   } catch (e) {
-//     // If encountering an error, return 0
-//     print("something bad happened dude!");
-//     return false;
-//   }
-// }
-
-// Future<String> get _localPath async {
-//   final directory = await getApplicationDocumentsDirectory();
-//
-//   return directory.path;
-// }
-//
-// Future<File> get _localFile async {
-//   final path = await _localPath;
-//   return File('$path/disclaimer.txt');
-// }
-//
-// Future<bool> readDisclaimerFile() async {
-//   try {
-//     final file = await _localFile;
-//
-//     // Read the file
-//     final contents = await file.readAsString();
-//
-//     return true;
-//   } catch (e) {
-//     // If encountering an error, return 0
-//     return false;
-//   }
-// }

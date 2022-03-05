@@ -17,9 +17,9 @@ String realDeviceID = 'nothing';
 Widget startPage = DisclaimerPage();
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setup_deviceID();
-  await find_file();
-  print(deviceID);
+  // await setup_deviceID();
+  // await find_file();
+  //print(deviceID);
   //realDeviceID = deviceID!;
   runApp(const MyApp());
 }
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: 'Mobile PVT POC App ',
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
 //aqua blue theme
       theme: FlexThemeData.light(
         scheme: FlexScheme.aquaBlue,
