@@ -132,10 +132,10 @@ class _SessionPageState extends State<SessionPage> {
                         Center(
                           child: (reactionTime != 1)
                               ? Text(
-                                  'Time: $reactionTime',
+                                  'Reaction Time: $reactionTime',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 34,
+                                      fontSize: 28,
                                       color: Colors.red),
                                 )
                               : Text(
@@ -155,6 +155,9 @@ class _SessionPageState extends State<SessionPage> {
                               setState(() {
                                 if (!showTarget) {
                                   reactionTime = 1;
+                                  pvt_data.stimulationTimes.add(
+                                      DateTime.now().millisecondsSinceEpoch -
+                                          session_start_milliseconds);
                                   ISI_timer.cancel();
                                 } else {
                                   reactionTime =

@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
@@ -102,10 +102,12 @@ class _RatingPageState extends State<RatingPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 16),
-                      child: Text(
-                        '         How do you feel?   $_currentSliderValue',
-                        style: Theme.of(context).textTheme.headline6,
-                        textAlign: TextAlign.justify,
+                      child: Center(
+                        child: Text(
+                          'How do you feel?   $_currentSliderValue',
+                          style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
                     ),
                     Padding(
