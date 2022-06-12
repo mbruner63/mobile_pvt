@@ -13,12 +13,15 @@ import 'Copy_protection.dart';
 FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
+int copyProtectedState = 0;
 String realDeviceID = 'nothing';
 Widget startPage = DisclaimerPage();
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await setup_deviceID();
-  // await find_file();
+  //await deleteIDFile();
+  copyProtectedState = await readCopyProtection();
+  //await setup_deviceID();
+  //await find_file();
   //print(deviceID);
   //realDeviceID = deviceID!;
   runApp(const MyApp());

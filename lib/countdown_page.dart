@@ -73,10 +73,11 @@ class _CountdownPageState extends State<CountdownPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/icon.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              //  child: Image.asset(
+              //'assets/images/splash_trans.png', //generic pvt logo
+              //'assets/images/ami_test1024', //AMI logo
+              //'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],

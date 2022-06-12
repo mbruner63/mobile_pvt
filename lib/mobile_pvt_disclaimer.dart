@@ -25,10 +25,11 @@ class DisclaimerPage extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/appbar_red.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              //  child: Image.asset(
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],

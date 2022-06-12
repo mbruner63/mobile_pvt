@@ -1,10 +1,9 @@
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_pvt/licensing_form.dart';
 import 'package:mobile_pvt/main_menu.dart';
 import 'package:mobile_pvt/config_page.dart';
-
-import 'AfterRating.dart';
 
 class FormPage extends StatefulWidget {
   FormPage({Key? key, required this.title}) : super(key: key) {}
@@ -42,10 +41,10 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/icon.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              // child: Image.asset(
+              //   'assets/images/icon.png',
+              //   'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],
@@ -145,7 +144,7 @@ class _FormPageState extends State<FormPage> {
                 ),
                 SizedBox(
                   width: 200,
-                  height: 70,
+                  height: 65,
                   child: ElevatedButton.icon(
                       style: ButtonStyle(),
                       icon: Icon(Icons.lock_open_rounded, size: 30),
@@ -159,21 +158,30 @@ class _FormPageState extends State<FormPage> {
                       //color: Colors.redAccent,
                       onPressed: () {
                         if (_formKey.currentState!.validate())
-                          //currentState.validate(_formKey);
+                        //currentState.validate(_formKey);
 
-                          // if (password == confirmpassword.text) {
-                          //   //confirmpassword.text = null;
-                          //
-                          //   // if (_formkey.currentState.validate()) {
-                          //   //_formkey.currentState.initState();
-                          //   //FormField.initialValue;
-                          //   _formKey?.currentState?.reset();
-                          //   confirmpassword.text = '';
+                        // if (password == confirmpassword.text) {
+                        //   //confirmpassword.text = null;
+                        //
+                        //   // if (_formkey.currentState.validate()) {
+                        //   //_formkey.currentState.initState();
+                        //   //FormField.initialValue;
+                        //   _formKey?.currentState?.reset();
+                        //   confirmpassword.text = '';
+                        if (settingsLicenseSelect == 0) {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ConfigPage(
                                       title: 'PVT - Configure Session')));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      //  ConfigPage(title: 'PVT - Configure Session')));
+                                      LicForm(title: 'PVT - App Licensing')));
+                        }
                         //
                         //   print("successful");
                         //

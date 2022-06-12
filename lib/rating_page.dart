@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
+import 'Copy_protection.dart';
 import 'PVTData.dart';
 import 'main.dart';
 
@@ -38,10 +39,10 @@ class _RatingPageState extends State<RatingPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/icon.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              //  child: Image.asset(
+              //   'assets/images/icon.png',
+              //  'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],
@@ -154,6 +155,10 @@ class _RatingPageState extends State<RatingPage> {
                       ),
                       onPressed: () async {
                         //was .push
+                        copyProtectedState = await readCopyProtection();
+                        if (copyProtectedState == 1) {
+                          await ActivateLicense();
+                        }
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

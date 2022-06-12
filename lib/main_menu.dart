@@ -7,6 +7,8 @@ import 'package:mobile_pvt/rating_page.dart';
 import '/main.dart';
 import 'form_page.dart';
 
+int settingsLicenseSelect = 0;
+
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key, required String title}) : super(key: key);
 
@@ -21,10 +23,11 @@ class MainMenu extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/icon.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              // child: Image.asset(
+              //'assets/images/splash_trans.png',  //generic pvt
+              // 'assets/images/ami_206red.png', //AMI
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],
@@ -48,6 +51,7 @@ class MainMenu extends StatelessWidget {
                   icon: Icon(Icons.settings, size: 50),
                   label: Text('Settings', style: TextStyle(fontSize: 24)),
                   onPressed: () {
+                    settingsLicenseSelect = 0;
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -78,6 +82,30 @@ class MainMenu extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) =>
                                 RatingPage(title: 'PVT - Pre-Session Rating')));
+                  },
+                ),
+              ),
+            ),
+            Container(
+              //licensing
+              constraints: BoxConstraints(
+                  minWidth: (MediaQuery.of(context).size.width - 10) / 2),
+              // width: double.maxFinite,
+              height: 90,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton.icon(
+                  style: ButtonStyle(),
+                  icon: Icon(Icons.vpn_key_sharp, size: 45),
+                  label: Text(' Licensing', style: TextStyle(fontSize: 24)),
+                  onPressed: () {
+                    settingsLicenseSelect = 1;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                //  ConfigPage(title: 'PVT - Configure Session')));
+                                FormPage(title: 'PVT - App Licensing')));
                   },
                 ),
               ),

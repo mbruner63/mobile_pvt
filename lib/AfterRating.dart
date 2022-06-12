@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:mobile_pvt/countdown_page.dart';
 import 'package:mobile_pvt/main_menu.dart';
+import 'Copy_protection.dart';
 import 'PVTData.dart';
 import 'PVTFile.dart';
 import 'main.dart';
@@ -31,10 +32,10 @@ class _PostRatingPageState extends State<PostRatingPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/appbar_red.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              //child: Image.asset(
+              //'assets/images/appbar_red.png', //AMI logo red
+              //'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],
@@ -133,9 +134,12 @@ class _PostRatingPageState extends State<PostRatingPage> {
                       // onPressed: () {
                       //   Navigator.pop(context);
                       // },
-                      onPressed: () {
+                      onPressed: () async {
                         //was .push
-                        writePVTFile();
+                        copyProtectedState = await readCopyProtection();
+                        if (copyProtectedState == 2) {
+                          writePVTFile(); //taken out for Sanita's trade show 04/15/2022
+                        }
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
