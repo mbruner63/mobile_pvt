@@ -20,9 +20,10 @@ class _SessionPageState extends State<SessionPage> {
   _SessionPageState() {}
 
   late Timer _timer;
+  late Timer ISI_timer;
   bool showTarget = false;
   bool showTime = false;
-  late int _delay = 0;
+  int ISI_delay = 0;
   int startMilliseconds = 0;
   //List<int> reactionTimes = [];
   int reactionTime = 0;
@@ -39,10 +40,27 @@ class _SessionPageState extends State<SessionPage> {
     pvt_data.Set_Date_Time();
     super.initState();
     rnd = Random();
-    _delay = 1 + rnd.nextInt(9);
+    //ISI_delay = 1 + rnd.nextInt(9);
     _secondsRemaining = sessionTime;
     session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
     _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
+    setISI();
+  }
+
+  void ISITimerCB() {
+    setState(() {
+      showTarget = true;
+      //targetShown = false;
+      startMilliseconds = DateTime.now().millisecondsSinceEpoch;
+      pvt_data.stimulationTimes.add(
+          DateTime.now().millisecondsSinceEpoch - session_start_milliseconds);
+    });
+  }
+
+  void setISI() {
+    ISI_delay = 1000 + rnd.nextInt(9000);
+
+    ISI_timer = Timer(Duration(milliseconds: ISI_delay), ISITimerCB);
   }
 
   void countdownTimerCB(Timer t) {
@@ -50,18 +68,6 @@ class _SessionPageState extends State<SessionPage> {
       setState(() {
         --_secondsRemaining;
       });
-      if (_delay > 0) {
-        --_delay;
-        if (_delay < 1) {
-          setState(() {
-            showTarget = true;
-            startMilliseconds = DateTime.now().millisecondsSinceEpoch;
-            pvt_data.stimulationTimes.add(
-                DateTime.now().millisecondsSinceEpoch -
-                    session_start_milliseconds);
-          });
-        }
-      }
     } else {
       t.cancel();
 
@@ -91,10 +97,10 @@ class _SessionPageState extends State<SessionPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //   'assets/images/icon.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              // child: Image.asset(
+              //   'assets/images/icon.png',
+              //   'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],
@@ -123,30 +129,61 @@ class _SessionPageState extends State<SessionPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Center(child: Text('Time: $reactionTime')),
+                        Center(
+                          child: (reactionTime != 1)
+                              ? Text(
+                                  'Reaction Time: $reactionTime',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 28,
+                                      color: Colors.red),
+                                )
+                              : Text(
+                                  'False Start',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 34,
+                                      color: Colors.red),
+                                ),
+                        ),
                         Expanded(
                           child: FittedBox(
                               //width: 250,
                               //height: 250,
-                              child: showTarget
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          showTarget = false;
-                                          reactionTime = DateTime.now()
-                                                  .millisecondsSinceEpoch -
-                                              startMilliseconds;
-                                          pvt_data.reactionTimes
-                                              .add(reactionTime);
-                                          _delay = 1 + rnd.nextInt(9);
-                                        });
-                                      },
-                                      child: const Image(
-                                          image: AssetImage(
-                                              'assets/images/pvt_target5.png')),
-                                    )
-                                  : null),
-                        ),
+                              child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (!showTarget) {
+                                  reactionTime = 1;
+                                  pvt_data.stimulationTimes.add(
+                                      DateTime.now().millisecondsSinceEpoch -
+                                          session_start_milliseconds);
+                                  ISI_timer.cancel();
+                                } else {
+                                  reactionTime =
+                                      DateTime.now().millisecondsSinceEpoch -
+                                          startMilliseconds -
+                                          150;
+                                  showTarget = false;
+                                }
+
+                                if (reactionTime < 100) {
+                                  reactionTime = 1;
+                                }
+                                pvt_data.reactionTimes.add(reactionTime);
+                                //_delay = 1 + rnd.nextInt(9);
+                              });
+                              setISI();
+                            },
+                            child: showTarget
+                                ? const Image(
+                                    image: AssetImage(
+                                        'assets/images/pvt_target5.png'))
+                                : const Image(
+                                    image: AssetImage(
+                                        'assets/images/transparent.png')),
+                          )),
+                        )
                       ],
                     ),
                   ),
@@ -187,7 +224,8 @@ class _SessionPageState extends State<SessionPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _timer.cancel();
+    ISI_timer.cancel();
+    super.dispose();
   }
 }

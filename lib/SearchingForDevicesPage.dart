@@ -91,10 +91,10 @@ class _SearchingForDevicesPageState extends State<SearchingForDevicesPage> {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               width: 75,
-              child: Image.asset(
-                //'assets/appbar_red.png',
-                'assets/images/CliniLogo_Lt.png', //CLINILABS
-              ),
+              // child: Image.asset(
+              //'assets/appbar_red.png',
+              //  'assets/images/CliniLogo_Lt.png', //CLINILABS
+              // ),
             ),
           ),
         ],

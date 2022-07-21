@@ -5,12 +5,21 @@ import 'package:flutter/services.dart';
 import 'package:mobile_pvt/mobile_pvt_disclaimer.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:platform_device_id/platform_device_id.dart';
+
+import 'Copy_protection.dart';
 
 //import 'package:flutter_launcher_icons/main.dart';
 FlutterBlue flutterBlue = FlutterBlue.instance;
 int sessionTime = 60; //default to test time;
 late DateTime startTime;
-void main() {
+int copyProtectedState = 0;
+String realDeviceID = 'nothing';
+Widget startPage = DisclaimerPage();
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await deleteIDFile();
+  copyProtectedState = await readCopyProtection();
   runApp(const MyApp());
 }
 
@@ -22,8 +31,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
-      title: 'Mobile PVT POC App',
-      //debugShowCheckedModeBanner: false,
+      title: 'Mobile PVT POC App ',
+      debugShowCheckedModeBanner: false,
 //aqua blue theme
       theme: FlexThemeData.light(
         scheme: FlexScheme.aquaBlue,
@@ -103,7 +112,7 @@ class MyApp extends StatelessWidget {
 //           textTheme: const TextTheme(
 //               headline4: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
 //       ),
-      home: const DisclaimerPage(),
+      home: startPage,
     );
   }
 }
