@@ -155,10 +155,10 @@ class _RatingPageState extends State<RatingPage> {
                       ),
                       onPressed: () async {
                         //was .push
-                        copyProtectedState = await readCopyProtection();
+                        /*copyProtectedState = await readCopyProtection();
                         if (copyProtectedState == 1) {
                           await ActivateLicense();
-                        }
+                        }*/
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

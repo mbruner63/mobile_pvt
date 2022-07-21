@@ -137,7 +137,7 @@ class _PostRatingPageState extends State<PostRatingPage> {
                       onPressed: () async {
                         //was .push
                         copyProtectedState = await readCopyProtection();
-                        if (copyProtectedState == 2) {
+                        if (copyProtectedState > 0) {
                           writePVTFile(); //taken out for Sanita's trade show 04/15/2022
                         }
                         Navigator.pushReplacement(

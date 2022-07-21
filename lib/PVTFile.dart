@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 import 'AfterRating.dart';
+import 'Copy_protection.dart';
 import 'PVTData.dart';
 
 Future<String?> get _localPath async {
@@ -96,7 +97,7 @@ Future<File> writePVTFile() async {
 
   final Email email = Email(
     body: "Attached is the PVT file automatically sent from mobile_pvt",
-    subject: "mobile_pvt: PVT file",
+    subject: "mobile_pvt: PVT file, Device ID = $androidId ",
     recipients: [
       "marty@bruner-consulting.com",
       "tomk@ambulatory-monitoring.com",

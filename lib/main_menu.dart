@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:mobile_pvt/config_page.dart';
 import 'package:mobile_pvt/rating_page.dart';
 import '/main.dart';
+import 'Copy_protection.dart';
 import 'form_page.dart';
+import 'licensing_form.dart';
 
 int settingsLicenseSelect = 0;
 
@@ -98,8 +100,10 @@ class MainMenu extends StatelessWidget {
                   style: ButtonStyle(),
                   icon: Icon(Icons.vpn_key_sharp, size: 45),
                   label: Text(' Licensing', style: TextStyle(fontSize: 24)),
-                  onPressed: () {
+                  onPressed: () async {
                     settingsLicenseSelect = 1;
+                    myint = 1;
+                    state = await readCopyProtection();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

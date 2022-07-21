@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/Resource/MyColors.dart';
 import 'package:mobile_pvt/register_form.dart';
 
 import 'Copy_protection.dart';
 import 'main.dart';
+
+String _message = "";
+int state = 0;
+int myint = 0;
 
 class LicForm extends StatefulWidget {
   const LicForm({Key? key, required String title}) : super(key: key);
@@ -14,13 +19,41 @@ class LicForm extends StatefulWidget {
 
 class _LicFormState extends State<LicForm> {
   final Activate_Controller = TextEditingController();
+  int shared_mem = 0;
+  String createMessage(int state) {
+    String message = "";
+    switch (state) {
+      case 0:
+        message =
+            "App Locked: Obtain activation code via e-mail from AMI by registering device below.";
+        break;
+      case 1:
+        message = "Unlocked:  PVT is ready to use";
+        break;
+      /*case 2:
+        DateTime date = new DateTime.fromMillisecondsSinceEpoch(
+            (expirationDate * BigInt.from(1000)).toInt());
+        message = "Activated: License expires on " + date.toString();
+        break;
+      case 3:
+        message =
+            "Expired:  Obtain new activation code from AMI via button below.";
+      //"Unlocked:  License activated upon first PVT Test performed.",
+      //"Activated: License expires on xx/xx/20xx.",
+      //"Expired:  Obtain new activation code from AMI via button below.",
+*/
+    }
+
+    return message;
+  }
 
   @override
   void initState() {
+    super.initState();
     setState(() {
       Activate_Controller.text = "";
+      _message = createMessage(state);
     });
-    return super.initState();
   }
 
   @override
@@ -68,17 +101,14 @@ class _LicFormState extends State<LicForm> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 4, 18, 12),
               child: Text(
-                "App Locked: Obtain activation code via e-mail from AMI by registering device below.",
-                //"Unlocked:  License activated upon first PVT Test performed.",
-                //"Activated: License expires on xx/xx/20xx.",
-                //"Expired:  Obtain new activation code from AMI via button below.",
+                _message,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 //style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              padding: const EdgeInsets.fromLTRB(18, 4, 18, 18),
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Column(
@@ -118,19 +148,17 @@ class _LicFormState extends State<LicForm> {
             ),
 
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              padding: const EdgeInsets.fromLTRB(18, 4, 18, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 24, 0, 12),
+                    padding: const EdgeInsets.fromLTRB(12, 24, 12, 0),
                     child: Text(
                       "Enter registration code from e-mail",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      //style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
                   Padding(
@@ -163,7 +191,7 @@ class _LicFormState extends State<LicForm> {
             ), // User Notes
 
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+              padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
               child: Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Column(
@@ -182,32 +210,95 @@ class _LicFormState extends State<LicForm> {
                       onPressed: () async {
                         bool result = false;
                         //Attempt to activation controller using code;
-                        copyProtectedState = await readCopyProtection();
-                        String message = "Unable to perform operation";
-                        switch (copyProtectedState) {
-                          case 0:
-                            if (await UnLock(Activate_Controller.text)) {
-                              String message = "License Unlocked";
-                            }
-                            break;
-                          case 2:
-                            if (await ExtendLicense(Activate_Controller.text)) {
-                              String message = "License Extended";
-                            }
-                            break;
-                          case 3:
-                            if (await RenewLicense(Activate_Controller.text)) {
-                              String message = "License Renewed";
-                            }
-                            break;
+                        /*if (Activate_Controller.text == "ZZZ") {
+                          await _areYouSure();
+                          if (shared_mem == 1) {
+                            destroy_licenses();
+                          }
+                          print(shared_mem);
+                        } else*/
+                        {
+                          String message = "Unable to perform operation";
+                          if (await UnLock(Activate_Controller.text)) {
+                            message = "License Unlocked.";
+                          } else {
+                            message = "Incorrect Code";
+                          }
+                          /*switch (copyProtectedState) {
+                            case 0:
+                              if (await UnLock(Activate_Controller.text)) {
+                                message =
+                                    "License Unlocked.  Start a PVT test to activate";
+                              } else {
+                                message = "Incorrect Code";
+                              }
+                              break;
+                            case 2:
+                              if (await ExtendLicense(
+                                  Activate_Controller.text)) {
+                                message = "License Extended";
+                              } else {
+                                message = "Incorrect Code";
+                              }
+                              break;
+                            case 3:
+                              if (await RenewLicense(
+                                  Activate_Controller.text)) {
+                                message = "License Renewed";
+                              } else {
+                                message = "Incorrect Code";
+                              }
+                              break;
+                          }*/
+                          await _showMyDialog(message);
+                          copyProtectedState = await readCopyProtection();
+                          setState(() {
+                            _message = createMessage(copyProtectedState);
+                          });
                         }
-                        await _showMyDialog(message);
                       },
                     ),
                   ],
                 ),
               ),
             ),
+/*
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 36, 18, 4),
+              child: Text(
+                "Reset App to default state",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.red.shade900),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 4, 18, 4),
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Column(
+                  children: [
+                    ElevatedButton.icon(
+                      style: ButtonStyle(),
+                      icon: Icon(
+                        Icons.disabled_by_default_outlined,
+                        size: 25,
+                        color: Colors.red.shade900,
+                      ),
+                      label: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text('Reset License',
+                            style: TextStyle(
+                                fontSize: 18, color: Colors.red.shade900)),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            */
           ],
         ),
       ),
@@ -305,7 +396,7 @@ class _LicFormState extends State<LicForm> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('AlertDialog Title'),
+          title: const Text('License Status'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -318,6 +409,44 @@ class _LicFormState extends State<LicForm> {
               child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _areYouSure() async {
+    String myMessage =
+        "Are you sure you want to clear your license status?  This will lock the app until re-registered";
+    shared_mem = 0;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Clear License Status'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(myMessage),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Clear'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                shared_mem = 1;
+              },
+            ),
+            TextButton(
+              child: const Text('Abort'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                shared_mem = 0;
               },
             ),
           ],

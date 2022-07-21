@@ -126,12 +126,12 @@ class _CountdownPageState extends State<CountdownPage> {
                   child: Text(
                       'Hold smartphone device throughout the entire session.\n\n'
                       'Use the preferred finger of your dominant hand for all tests.\n\n'
-                      'When the target is presented, tap the target as quickly as possible.\n\n'
+                      'When the target is presented, tap the target area as quickly as possible.\n\n'
                       'The numbers at the top of the display show how fast you have responded each time - the smaller the number, the better you did.\n\n'
                       'Try to do your best and get the lowest number you possibly can each time you see the target.\n\n'
                       'If you press too early (before the target appears) you will see an error message “False Start.”\n\n'
                       'If you forget to release the target, after a short time the test screen will remind you. '
-                      // 'Hold smartphone device throughout the entire session.\n\n'
+                      'Hold smartphone device throughout the entire session.\n\n'
                       // 'Session will automatically begin in:'
                       ,
                       style: Theme.of(context).textTheme.headline6)),

@@ -20,10 +20,6 @@ main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await deleteIDFile();
   copyProtectedState = await readCopyProtection();
-  //await setup_deviceID();
-  //await find_file();
-  //print(deviceID);
-  //realDeviceID = deviceID!;
   runApp(const MyApp());
 }
 
