@@ -10,7 +10,7 @@ class PVT_Data {
   int Trial_Number = 1;
   String Trial_Date = "12/12/21";
   String Trial_Time = "1200";
-  int ISI_Min = 1000;
+  int ISI_Min = 2000;
   int ISI_Max = 10000;
   int Trial_length = 60;
   String PVT_Serial_Num = "0001";
@@ -28,14 +28,19 @@ class PVT_Data {
     Trial_Time = timeFormatted;
   }
 
+  int running_size = 0;
   void ResetData() {
     reactionTimes = [];
     stimulationTimes = [];
+    running_size = 0;
   }
 
   void InsetData(int reaction_time, int stimulation_time) {
     reactionTimes.add(reaction_time);
     stimulationTimes.add(stimulation_time);
+    print("new size -> $reactionTimes.length");
+    print("last length -> $running_size");
+    running_size = reactionTimes.length;
   }
 }
 

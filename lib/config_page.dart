@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //import '/main.dart';
 import 'PVTData.dart';
 import 'main.dart';
+import 'PVTFile.dart';
 
 List<int> sessionTimes = [60, 180, 300, 600];
 
@@ -22,7 +23,7 @@ class ConfigPage extends StatefulWidget {
 class _ConfigPageState extends State<ConfigPage> {
   _ConfigPageState() {}
   int i = 5;
-  List<bool> isSelected = [true, false, false, false];
+  List<bool> isSelected = [false, false, false, false];
   final EI_Controller = TextEditingController();
   final SID_Controller = TextEditingController();
   final SI_Controller = TextEditingController();
@@ -67,6 +68,7 @@ class _ConfigPageState extends State<ConfigPage> {
     pvt_data.S_ID = this.preferences?.getString("sid") ?? "0001";
     pvt_data.Main_Email =
         this.preferences?.getString("email") ?? "marty@bruner-consulting.com";
+    pvt_data.Trial_length = this.preferences?.getInt("Trial_length") ?? 60;
   }
 
   void _setPreference() async {
@@ -75,6 +77,7 @@ class _ConfigPageState extends State<ConfigPage> {
       this.preferences?.setString("sinitials", pvt_data.S_Initials);
       this.preferences?.setString("sid", pvt_data.S_ID);
       this.preferences?.setString("email", pvt_data.Main_Email);
+      this.preferences?.setInt("Trial_length", pvt_data.Trial_length);
     });
   }
 
@@ -83,7 +86,9 @@ class _ConfigPageState extends State<ConfigPage> {
   @override
   Widget build(BuildContext context) {
     int sessionLengthIndex = 0;
-    switch (sessionLengthIndex) {
+    int i = 0;
+
+    switch (pvt_data.Trial_length) {
       case 60:
         sessionLengthIndex = 0;
         break;
@@ -100,6 +105,10 @@ class _ConfigPageState extends State<ConfigPage> {
         sessionLengthIndex = 0;
         break;
     }
+    for (var i = 0; i < 4; i++) {
+      isSelected[i] = false;
+    }
+    isSelected[sessionLengthIndex] = true;
     switch (sessionTime) {
     }
     return Scaffold(
@@ -114,11 +123,22 @@ class _ConfigPageState extends State<ConfigPage> {
         // title: const Text('PVT Session in Progress'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
-              // child: Image.asset(
-              // 'assets/images/splash_trans.png', //generic pvt
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
+              //  child: Image.asset(
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
               // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),

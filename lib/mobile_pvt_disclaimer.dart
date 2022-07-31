@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_launcher_icons/main.dart';
@@ -22,9 +24,19 @@ class DisclaimerPage extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
               //  child: Image.asset(
               //'assets/image/splash_trans206.png', //generic pvt
               //  'assets/images/ami_test206red.png', //AMI logo
@@ -46,7 +58,6 @@ class DisclaimerPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Text(
-                'This is a proof-of-concept app for the Psychomotor Vigilance Task (PVT) .\n\n'
                 'The Psychomotor Vigilance Task (PVT) is a sustained-attention, reaction-timed task that measures the speed with which subjects respond to a visual stimulus.'
                 'This app is intended for investigational data collection purposes ONLY.',
                 style: Theme.of(context).textTheme.headline5,

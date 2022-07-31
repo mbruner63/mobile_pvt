@@ -5,6 +5,8 @@ import 'package:mobile_pvt/licensing_form.dart';
 import 'package:mobile_pvt/main_menu.dart';
 import 'package:mobile_pvt/config_page.dart';
 
+import 'main.dart';
+
 class FormPage extends StatefulWidget {
   FormPage({Key? key, required this.title}) : super(key: key) {}
   final String title;
@@ -38,12 +40,23 @@ class _FormPageState extends State<FormPage> {
         // title: const Text('PVT Session in Progress'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
-              // child: Image.asset(
-              //   'assets/images/icon.png',
-              //   'assets/images/CliniLogo_Lt.png', //CLINILABS
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
+              //  child: Image.asset(
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),
           ),

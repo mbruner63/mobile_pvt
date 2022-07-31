@@ -36,12 +36,23 @@ class _RatingPageState extends State<RatingPage> {
         // title: const Text('PVT Session in Progress'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
               //  child: Image.asset(
-              //   'assets/images/icon.png',
-              //  'assets/images/CliniLogo_Lt.png', //CLINILABS
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),
           ),

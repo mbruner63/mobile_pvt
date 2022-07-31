@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:mobile_pvt/mobile_pvt_disclaimer.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:platform_device_id/platform_device_id.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+//import 'package:platform_device_id/platform_device_id.dart';
 
 import 'Copy_protection.dart';
 
@@ -16,8 +17,11 @@ late DateTime startTime;
 int copyProtectedState = 0;
 String realDeviceID = 'nothing';
 Widget startPage = DisclaimerPage();
+
+late PackageInfo packageInfo;
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  packageInfo = await PackageInfo.fromPlatform();
   //await deleteIDFile();
   copyProtectedState = await readCopyProtection();
   runApp(const MyApp());
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
-      title: 'Mobile PVT POC App ',
+      title: 'Mobile PVT POC App v' + packageInfo.version,
       debugShowCheckedModeBanner: false,
 //aqua blue theme
       theme: FlexThemeData.light(

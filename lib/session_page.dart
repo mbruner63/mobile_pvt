@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Copy_protection.dart';
 import 'PVTData.dart';
+import 'PVTFile.dart';
 import 'main.dart';
 import 'main_menu.dart';
 import 'AfterRating.dart';
+import 'package:wakelock/wakelock.dart';
 
 //DateTime.now()
 class SessionPage extends StatefulWidget {
@@ -34,17 +38,32 @@ class _SessionPageState extends State<SessionPage> {
   late Random rnd;
   bool enabled = false;
   late int _secondsRemaining;
+  SharedPreferences? preferences;
+  Future<void> initializePreference() async {
+    this.preferences = await SharedPreferences.getInstance();
+    pvt_data.E_Initials = this.preferences?.getString("einitials") ?? "jkb";
+    pvt_data.S_Initials = this.preferences?.getString("sinitials") ?? "mlb";
+    pvt_data.S_ID = this.preferences?.getString("sid") ?? "0001";
+    pvt_data.Main_Email =
+        this.preferences?.getString("email") ?? "marty@bruner-consulting.com";
+    pvt_data.Trial_length = this.preferences?.getInt("Trial_length") ?? 60;
+  }
+
   @override
   void initState() {
-    pvt_data.ResetData();
-    pvt_data.Set_Date_Time();
+    initializePreference().whenComplete(() {
+      pvt_data.ResetData();
+      pvt_data.Set_Date_Time();
+
+      rnd = Random();
+      Wakelock.enable();
+      //ISI_delay = 1 + rnd.nextInt(9);
+      _secondsRemaining = pvt_data.Trial_length;
+      session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
+      _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
+      setISI();
+    });
     super.initState();
-    rnd = Random();
-    //ISI_delay = 1 + rnd.nextInt(9);
-    _secondsRemaining = sessionTime;
-    session_start_milliseconds = DateTime.now().millisecondsSinceEpoch;
-    _timer = Timer.periodic(const Duration(seconds: 1), countdownTimerCB);
-    setISI();
   }
 
   void ISITimerCB() {
@@ -63,19 +82,45 @@ class _SessionPageState extends State<SessionPage> {
     ISI_timer = Timer(Duration(milliseconds: ISI_delay), ISITimerCB);
   }
 
-  void countdownTimerCB(Timer t) {
+  Future<void> countdownTimerCB(Timer t) async {
     if (_secondsRemaining > 0) {
       setState(() {
         --_secondsRemaining;
+        print(_secondsRemaining);
       });
+
+      // put code here that will cause a timeout (9 seconds)
+      // save reaction time and go into a delay.
+      // look at UI code (target press) to figure out how to do this.
+      var TimeoutTime =
+          DateTime.now().millisecondsSinceEpoch - startMilliseconds - 150;
+      if ((TimeoutTime > 9999) && showTarget) {
+        print("Timeout!!!");
+        setState(() {
+          reactionTime = 9999;
+          showTarget = false;
+          /* pvt_data.stimulationTimes.add(DateTime.now().millisecondsSinceEpoch -
+              session_start_milliseconds);*/
+          ISI_timer.cancel();
+          pvt_data.reactionTimes.add(9999);
+          print('reaction time added -> ${pvt_data.reactionTimes.length}');
+          setISI();
+        });
+      }
     } else {
       t.cancel();
-
+      Wakelock.disable();
+      copyProtectedState = await readCopyProtection();
+      if (copyProtectedState > 0) {
+        writePVTFile(); //taken out for Sanita's trade show 04/15/2022
+      }
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  PostRatingPage(title: 'PVT - Post Session Rating')),
+              builder: (context) => const MainMenu(title: 'PVT - Main Menu')),
+          //when we remove the post rating page-HOW DO WE HANDLE DATA & EMAIL?
+          //Post rating page to be removed 7/21/22
+          //PostRatingPage(title: 'PVT - Post Session Rating')),
           (Route<dynamic> route) => false);
     }
   }
@@ -94,12 +139,23 @@ class _SessionPageState extends State<SessionPage> {
         // title: const Text('PVT Session in Progress'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
-              // child: Image.asset(
-              //   'assets/images/icon.png',
-              //   'assets/images/CliniLogo_Lt.png', //CLINILABS
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
+              //  child: Image.asset(
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),
           ),
@@ -171,6 +227,9 @@ class _SessionPageState extends State<SessionPage> {
                                   reactionTime = 1;
                                 }
                                 pvt_data.reactionTimes.add(reactionTime);
+
+                                print(
+                                    'reaction time added -> ${pvt_data.reactionTimes.length}');
                                 //_delay = 1 + rnd.nextInt(9);
                               });
                               setISI();
@@ -191,11 +250,11 @@ class _SessionPageState extends State<SessionPage> {
                 ),
               ),
             ),
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
               child: Text('Session Time Remaining: $_secondsRemaining',
                   style: Theme.of(context).textTheme.bodyText1),
-            ),
+            ),*/
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
@@ -207,6 +266,7 @@ class _SessionPageState extends State<SessionPage> {
                   child: Text('ABORT SESSION', style: TextStyle(fontSize: 18)),
                 ),
                 onPressed: () async {
+                  Wakelock.disable();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

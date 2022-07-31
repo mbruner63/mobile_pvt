@@ -70,13 +70,23 @@ class _CountdownPageState extends State<CountdownPage> {
         // title: const Text('PVT Session in Progress'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
               //  child: Image.asset(
-              //'assets/images/splash_trans.png', //generic pvt logo
-              //'assets/images/ami_test1024', //AMI logo
-              //'assets/images/CliniLogo_Lt.png', //CLINILABS
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
+              // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),
           ),
@@ -130,7 +140,7 @@ class _CountdownPageState extends State<CountdownPage> {
                       'The numbers at the top of the display show how fast you have responded each time - the smaller the number, the better you did.\n\n'
                       'Try to do your best and get the lowest number you possibly can each time you see the target.\n\n'
                       'If you press too early (before the target appears) you will see an error message “False Start.”\n\n'
-                      'If you forget to release the target, after a short time the test screen will remind you. '
+                      // 'If you forget to release the target, after a short time the test screen will remind you. '
                       'Hold smartphone device throughout the entire session.\n\n'
                       // 'Session will automatically begin in:'
                       ,

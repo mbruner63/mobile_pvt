@@ -70,12 +70,22 @@ class _LicFormState extends State<LicForm> {
         title: const Text('PVT - App Licensing'),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              width: 75,
-              // child: Image.asset(
-              //'assets/images/splash_trans.png',  //generic pvt
-              // 'assets/images/ami_206red.png', //AMI
+            padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "v " + packageInfo.version,
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+              // padding: const EdgeInsets.all(4.0),
+              // child: Container(
+              //   width: 75,
+              //  child: Image.asset(
+              //'assets/image/splash_trans206.png', //generic pvt
+              //  'assets/images/ami_test206red.png', //AMI logo
               // 'assets/images/CliniLogo_Lt.png', //CLINILABS
               // ),
             ),
